@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Управление</title>
     <link rel="stylesheet" href="style/management.css">
+
+    <script src="js/app.js"></script>
 </head>
 
 <body>
@@ -243,6 +245,31 @@
                 </div>
 
                   <?php 
+                //   $conn = mysqli_connect('localhost','root','root','biblioteka');
+                //   if (!$conn) {
+                //       die("Connection failed: " . mysqli_connect_error());
+                //   }
+                //   echo "Connected successfully";
+                  
+
+                //       $inputNHuman = $_POST['name_human'];
+                //       $inputIdHuman = $_POST['idd_human'];
+                      
+                //         $query = "SELECT * FROM users WHERE surname='$inputNHuman' AND idusers='$inputIdHuman'";
+                //       $result= mysqli_query($conn,$query) or die(mysqli_error($conn));
+                //       var_dump($result);
+                //       $row = mysqli_fetch_assoc($result);
+                //       var_dump($row);
+                //     //    $result = mysqli_query($conn, $query);
+                //     //   echo $query
+                //   ?>
+
+
+
+
+
+                </form>
+                <?php 
                   $conn = mysqli_connect('localhost','root','root','biblioteka');
                   if (!$conn) {
                       die("Connection failed: " . mysqli_connect_error());
@@ -254,19 +281,53 @@
                       $inputIdHuman = $_POST['idd_human'];
                       
                         $query = "SELECT * FROM users WHERE surname='$inputNHuman' AND idusers='$inputIdHuman'";
-                      $result= mysqli_query($conn,$query) or die(mysqli_error($conn));
-                      var_dump($result);
-                      $row = mysqli_fetch_assoc($result);
-                      var_dump($row);
-                    //    $result = mysqli_query($conn, $query);
-                    //   echo $query
-                  ?>
 
 
+                        $result = $conn->query($sql); 
+                        if ($result->num_rows > 0) { 
+
+                        // output data of each row 
+                        while($row = $result->fetch_assoc()) { 
+
+                        echo "<tr><td>" . $row["idusers"]
+                            . "</td><td>" . $row["n_surname"] 
+                            . "</td><td>" . $row["n_name"]
+                            . "</td><td>" . $row["n_patronumic"]
+                            . "</td><td>" . $row["n_passport"]
+                            . "</td><td>" . $row["n_tel"] 
+                            . "</td><td>" . $row["n_address"]
+                            . "</td></tr>"; 
+                        } 
+                        echo "</tbody>";
+
+                        } else { echo "0 results"; } 
+                        $conn->close(); 
+                ?>
+                  <div class="table_php">
+                  <caption>Данные читателя</caption>
+                      <table>
+                          <tr>
+                              <th>Айди</th>
+                              <th>Фамилия</th>
+                              <th>Имя</th>
+                              <th>Отчество</th>
+                              <th>Паспорт</th>
+                              <th>Номер</th>
+                              <th>Адрес</th>
+                          </tr>
+                          <tr>
+                                <td ></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                          </tr>
+                      </table>
+                  </div>
 
 
-
-                </form>
                 
             </div>
 
